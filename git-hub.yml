@@ -20,15 +20,15 @@ jobs:
         env:
           SSH_PRIVATE_KEY: ${{ secrets.EC_SSH_KEY }}
           SOURCE: "."
-          REMOTE_HOST: ${{ secrets.HOST_DNS }}
-          REMOTE_USER: ${{ secrets.USERNAME }}
-          TARGET: ${{ secrets.HOST_DIR }}
+          REMOTE_HOST: 'ec2-13-233-120-5.ap-south-1.compute.amazonaws.com'
+          REMOTE_USER: 'ec2-user'
+          TARGET: '/home/ec2-user'
 
       - name: Executing remote ssh commands using ssh key
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ secrets.HOST_DNS }}
-          username: ${{ secrets.USERNAME }}
+        host: 'ec2-13-233-120-5.ap-south-1.compute.amazonaws.com'
+          username: 'ec2-user'
           key: ${{ secrets.EC_SSH_KEY }}
           script: |
             sudo yum -y update
